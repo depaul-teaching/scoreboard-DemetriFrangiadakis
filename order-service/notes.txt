@@ -1,0 +1,14 @@
+﻿IT 390 - Week 2 Lab
+Containerize a Service
+
+1. Name one change you made to the starter Dockerfile and explain what problem it fixed.
+
+One change I made was switching from python:3.12 to python:3.12-slim. This helps reduce the overall image size since it doesn't include as many unnecessary packages. I also created a non-root user for the application to run under, which helps with security by limiting its permissions.
+
+2. What is the size of your final image, and which single layer contributed the most to it?
+
+My final image had a disk usage of 244 MB according to docker images. Looking at docker history, the largest individual layer was the Debian base layer at 87.6 MB. Out of the instructions I added myself, installing the Python dependencies took up the most space at 51.7 MB.
+
+3. Why does copying requirements.txt before the rest of the source make rebuilds faster after a code change?
+
+Copying requirements.txt first lets Docker cache the dependencies separately from the actual application code. So if I make changes to main.py but don't change the requirements, Docker can reuse the layer where the dependencies were already installed. This saves time since it doesn't have to go through installing all the packages again every time I rebuild the image.
