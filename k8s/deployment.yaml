@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: scoreboard
-          image: ghcr.io/depaul-teaching/scoreboard-demetrifrangiadakis/order-service:sha-4230b66
+          image: scoreboard-api:sha-e150638
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
