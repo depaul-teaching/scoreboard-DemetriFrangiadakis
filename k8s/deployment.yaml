@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scoreboard
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: scoreboard
+  template:
+    metadata:
+      labels:
+        app: scoreboard
+    spec:
+      containers:
+        - name: scoreboard
+          image: ghcr.io/depaul-teaching/scoreboard-demetrifrangiadakis/order-service:sha-4230b66
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: FAVORITE_TEAM
+              value: "Cubs"
